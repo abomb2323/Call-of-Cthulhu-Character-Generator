@@ -33,6 +33,26 @@ public class Character {
 		INT = getD6(2, 6);
 		
 		EDU = getD6(3, 6);
+		rand.setSeed(System.nanoTime());
+		AGE = rand.nextInt(maxAge - minAge + 1) + minAge;
+		
+		if(AGE < 14){
+			STR /= 2;
+			CON /= 2;
+			POW /= 2;
+			DEX /= 2;
+			APP /= 2;
+			SIZ /= 3;
+			INT /= 2;
+			
+		}
+		
+		if(AGE < (EDU + 6)){
+			EDU = AGE - 6;
+			if(EDU < 1){
+				EDU = 1;
+			}
+		}
 		
 		SAN = POW*5;
 		LUCK = POW*5;
@@ -46,15 +66,9 @@ public class Character {
 		
 		
 		
-		rand.setSeed(System.nanoTime());
-		AGE = rand.nextInt(maxAge - minAge + 1) + minAge;
-		if(AGE < (EDU + 6)){
-			EDU = AGE - 6;
-			if(EDU < 1){
-				EDU = 1;
-			}
-			
-		}
+		
+		
+		
 	}
 	
 	public int getD6(int numRolls, int afterAdd){
@@ -102,7 +116,7 @@ public class Character {
 		ArrayList<String> list = null;
 		if (surname) {
 			try {
-				s = new Scanner(new File("src/namelists/surnames.txt"));
+				s = new Scanner(new File("namelists/surnames.txt"));
 
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
@@ -113,7 +127,7 @@ public class Character {
 			}
 		} else if(gender.equalsIgnoreCase("male")){
 			try {
-				s = new Scanner(new File("src/namelists/malefirst.txt"));
+				s = new Scanner(new File("namelists/malefirst.txt"));
 
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
@@ -124,7 +138,7 @@ public class Character {
 			}
 		} else{
 			try {
-				s = new Scanner(new File("src/namelists/femalefirst.txt"));
+				s = new Scanner(new File("namelists/femalefirst.txt"));
 
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
